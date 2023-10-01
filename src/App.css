@@ -4,15 +4,15 @@
   box-sizing: border-box;
 }
 
-body{
-  overflow: hidden;
+body {
+  overflow-x: hidden;
 }
 
-#root{
+#root {
   height: 100%;
 }
 
-.App{
+.App {
   height: 100vh;
   background-color: black;
 }
