@@ -1,4 +1,3 @@
-import React from 'react'
 import foody from "../assets/images/foody.png";
 import cartIcon from "../assets/icons/cart.svg";
 import { Link } from "react-router-dom";
@@ -11,14 +10,12 @@ const Header = ({cartCount}) => {
     const navigate = useNavigate();
     const [isLoggedIn, setIsLoggedIn] = useState(false);
 
-
     const handleLogout = () => {
         sessionStorage.removeItem('Auth token');
         sessionStorage.removeItem('User Id');
         window.dispatchEvent(new Event("storage"))
         navigate("/");
     }
-
 
     useEffect(() => {
         const checkAuthToken = () => {
@@ -37,8 +34,8 @@ const Header = ({cartCount}) => {
         }
     }, [])
 
-  return (
-    <nav id="header" className="bg-black text-white">
+    return (
+        <nav id="header" className="bg-black text-white">
             <div className="w-full container mx-auto flex flex-wrap items-center justify-between mt-0 py-2">
                 <div className="logo-wrapper pl-4 flex items-center">
                     <Link to="/" className="toggleColor text-white no-underline hover:no-underline font-bold text-2xl lg:text-4xl">
@@ -67,7 +64,7 @@ const Header = ({cartCount}) => {
                 </div>
             </div>
         </nav>
-  )
+    )
 }
 
 export default Header
