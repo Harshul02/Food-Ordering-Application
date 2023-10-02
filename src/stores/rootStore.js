@@ -1,14 +1,7 @@
-import { combineReducers } from "redux";
-import cartReducer from "./cart/cartSlice";
-import productReducer from "./menu/productsSlice";
-import addressReducer from "./userInfo/addressSlice";
+import { configureStore, applyMiddleware } from "@reduxjs/toolkit";
+import rootReducer from "./rootReducer";
+import thunk from "redux-thunk";
 
-const rootReducer = combineReducers(
-    {
-        cart: cartReducer,
-        products: productReducer,
-        address: addressReducer
-    }
-);
+const store = configureStore({ reducer: rootReducer}, applyMiddleware(thunk));
 
-export default rootReducer;
+export default store;

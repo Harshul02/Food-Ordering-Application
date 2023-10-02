@@ -3,7 +3,7 @@ import { AddProduct } from "./AddProduct";
 export const ProductPreviewCard = ({ product, onAddProduct }) => {
 
     const addProduct = () => {
-        onAddProduct(product)
+        onAddProduct(product);
     }
 
     return (
