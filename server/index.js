@@ -12,7 +12,9 @@ var corsOptions = {
 }
 app.use(cors(corsOptions));
 
+const env = require('dotenv').config({path: '../.env'});
 
+const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
 const productRouter = require('./routes/productRouter');
 
 
