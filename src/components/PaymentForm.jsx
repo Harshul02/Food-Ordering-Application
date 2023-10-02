@@ -35,6 +35,7 @@ const PaymentForm = () => {
 
         setLoading(true);
         try {
+            let id=sessionStorage.getItem('User Id');
             const { error: backeEndError, clientSecret } = await fetch('http://localhost:8080/create-payment-intent', {
                 method: 'POST',
                 headers: {
@@ -43,8 +44,8 @@ const PaymentForm = () => {
                 body: JSON.stringify({
                     paymentMethodType: 'card',
                     orderItems: cart,
-                    userId: '',
-                    shippingAddress: address
+                    shippingAddress: address,
+                    userId: id
                 })
             }).then(r => r.json());
 
@@ -55,7 +56,7 @@ const PaymentForm = () => {
                     }
                 }
             )
-            console.log(stripeError, paymentIntent);
+            console.log(stripeError);
             if (backeEndError || stripeError) {
                 setError(backeEndError || stripeError)
             } else if (paymentIntent.status === 'succeeded') {

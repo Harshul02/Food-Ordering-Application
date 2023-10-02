@@ -101,8 +101,7 @@ app.listen(PORT, () => {
 app.post('/create-payment-intent', async(req, res) => {
     try {
         const { orderItems, shippingAddress, userId } = req.body;
-        // console.log(shippingAddress);
-
+        // console.log(userId);
         const totalPrice = calculateOrderAmount(orderItems);
 
         const taxPrice = 0;
@@ -122,11 +121,27 @@ app.post('/create-payment-intent', async(req, res) => {
 
         // await order.save();
 
+
+        const customer = await stripe.customers.create({
+            email : 'testing@gmail.com',
+            name: 'Jenny Rosen',
+            address: {
+              line1: '510 Townsend St',
+              postal_code: '98140',
+              city: 'San Francisco',
+              state: 'CA',
+              country: 'US',
+            },
+        });
+        // console.log(customer);
         const paymentIntent = await stripe.paymentIntents.create({
             amount: totalPrice,
             currency: 'usd',
-            description: 'testing'
+            description: 'testing',
+            customer:customer.id,
+            receipt_email : customer.email,
         })
+        console.log(paymentIntent);
         if(paymentIntent)
             console.log("success");
         // console.log(paymentIntent);
