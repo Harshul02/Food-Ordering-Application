@@ -14,7 +14,7 @@ const Register = () => {
 
     const onSubmit = (data) => {
         setLoading(true);
-        const authentication = getAuth();
+        const authentication = getAuth(app);
         let uid = '';
         createUserWithEmailAndPassword(authentication, data.email, data.password)
             .then((response) => {
@@ -22,44 +22,56 @@ const Register = () => {
                 sessionStorage.setItem('User Id', uid);
                 sessionStorage.setItem('Auth token', response._tokenResponse.refreshToken)
                 window.dispatchEvent(new Event("storage"))
+                setLoading(false)
+                toast.success('Account created successfully!🎉', {
+                    position: "top-right",
+                    autoClose: 5000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    theme: 'dark'
+                })
+                navigate('/')
             })
             .catch((error) => {
                 if (error.code === 'auth/email-already-in-use') {
                     toast.error('Email Already In Use')
                 }
             })
-        
-            fetch('http://localhost:8080/api/create-user', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({
-                    email: data.email,
-                    name: data.name,
-                    _id: uid
-                })
-            }).then((response) => {
-                if (response.status === 200) {
-                    setLoading(false);
-                    toast.success('Account created successfully!🎉', {
-                        position: "top-right",
-                        autoClose: 5000,
-                        hideProgressBar: false,
-                        closeOnClick: true,
-                        pauseOnHover: true,
-                        draggable: true,
-                        progress: undefined,
-                        theme: 'dark'
-                        });
-                    navigate('/');
-                } else {
-                    console.log(response.json());
-                }
-            }).catch((error) => {
-                setLoading(false);
-                console.log(error)
-            })
+            // console.log(data);
+            // fetch('http://localhost:8080/api/create-user', {
+            //     method: 'POST',
+            //     headers: {
+            //         'Content-Type': 'application/json'
+            //     },
+            //     body: JSON.stringify({
+            //         email: data.email,
+            //         name: data.name,
+            //         _id: uid
+            //     })
+            // }).then((response) => {
+            //     if (response.status === 200) {
+            //         setLoading(false);
+            //         toast.success('Account created successfully!🎉', {
+            //             position: "top-right",
+            //             autoClose: 5000,
+            //             hideProgressBar: false,
+            //             closeOnClick: true,
+            //             pauseOnHover: true,
+            //             draggable: true,
+            //             progress: undefined,
+            //             theme: 'dark'
+            //             });
+            //         navigate('/');
+            //     } else {
+            //         console.log(response.json());
+            //     }
+            // }).catch((error) => {
+            //     setLoading(false);
+            //     console.log(error)
+            // })
     }
     return (
         <div className="h-screen bg-black flex  items-center justify-center">

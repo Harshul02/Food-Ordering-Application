@@ -11,6 +11,10 @@ const userSchema = mongoose.Schema(
         required: true,
         unique: true,
       },
+      _id:{
+        type: String,
+        required: true
+      }
     },
     {
       timestamps: true,

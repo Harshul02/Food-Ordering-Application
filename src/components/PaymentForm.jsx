@@ -47,7 +47,7 @@ const PaymentForm = () => {
                     shippingAddress: address
                 })
             }).then(r => r.json());
-            
+
             const { error: stripeError, paymentIntent } = await stripe.confirmCardPayment(
                 clientSecret, {
                     payment_method: {
@@ -55,6 +55,7 @@ const PaymentForm = () => {
                     }
                 }
             )
+            console.log(stripeError, paymentIntent);
             if (backeEndError || stripeError) {
                 setError(backeEndError || stripeError)
             } else if (paymentIntent.status === 'succeeded') {

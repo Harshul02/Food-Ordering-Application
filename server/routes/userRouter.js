@@ -10,7 +10,7 @@ router.post('/create-user', (req, res) => {
         email: req.body.email,
         _id: req.body._id,
     })
-
+    console.log(user);
     user.save((err, user) => {
         if (err) {
             res.status(400).send({ error : err})
