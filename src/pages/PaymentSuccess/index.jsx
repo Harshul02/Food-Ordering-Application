@@ -8,7 +8,7 @@ const PaymentSuccess = () => {
   useEffect(() => {
     const redirectTimeout = setTimeout(() => {
       navigate('/');
-    }, 5000); 
+    }, 3000); 
 
     return () => clearTimeout(redirectTimeout); // Clear the timeout if the component unmounts
   }, [navigate]);

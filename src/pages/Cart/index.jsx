@@ -7,8 +7,10 @@ import { ReactComponent as ArrowRightSvg } from "../../assets/icons/arrow-right-
 import { AddressForm } from "../../components/AddressForm";
 import { ProductsSummary } from "../../components/ProductsSummary";
 import { StripeWrapper } from "../../components/PaymentForm";
+import { useNavigate } from "react-router-dom";
 
 const Cart = () => {
+  const navigate = useNavigate();
     const cart = useSelector(cartProducts);
     const tabs= ['Summary', 'Delivery', 'Payment'];
     const [currentTab, handleTabSwitch] = useTabSwitch(tabs, 'Summary');
@@ -34,7 +36,7 @@ const Cart = () => {
                 <AddressForm onTabSwitch={handleTabSwitch}/>
             </div>
             <div className={`tabs ${currentTab !== 'Payment' ? 'hidden' : ''}`}>
-                <StripeWrapper />
+            {sessionStorage.getItem('User Id') ? (<StripeWrapper />):(navigate('/login'))}
             </div>
         </div>
     )
