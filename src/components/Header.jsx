@@ -5,6 +5,14 @@ import { useNavigate } from "react-router-dom";
 import Button from "./elements/Button";
 import { useEffect, useState } from "react";
 
+
+const scrollToAbout = () => {
+    const about = document.getElementById('about');
+    if (about) {
+      about.scrollIntoView({ behavior: 'smooth' }); 
+    }
+  };
+
 const Header = ({cartCount}) => {
 
     const navigate = useNavigate();
@@ -44,7 +52,7 @@ const Header = ({cartCount}) => {
                 </div>
                 <div className="nav-menu-wrapper flex items-center justify-between space-x-10">
                     <Link to="/" className="text-xl">Home</Link>
-                    <Link to="#about" className="text-xl">About</Link>
+                    <Link to="#about" className="text-xl" onClick={scrollToAbout}>About</Link>
                 </div>
                 <div className="flex items-center justify-center space-x-4">
                     <Link to="/cart" className="mr-4 relative">

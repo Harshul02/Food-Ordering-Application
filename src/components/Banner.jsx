@@ -1,5 +1,14 @@
 import Button from "./elements/Button";
 
+
+
+const scrollToFoodItem = () => {
+    const foodItem = document.getElementById('food-item');
+    if (foodItem) {
+      foodItem.scrollIntoView({ behavior: 'smooth' }); // Scroll to the element smoothly
+    }
+  };
+
 export const Banner = () => {
     return (
         <div className="banner w-full md:w-2/3 px-7 mx-auto relative flex items-center-justify-between">
@@ -11,10 +20,11 @@ export const Banner = () => {
                     Get Started Today!
                 </p>
                 <div className="btn-container">
-                    <Button>Order Now</Button>
-                    <a href="/menu" className="text-yellow-400 hover:text-yellow-500 font-bold text-decoration-line px-3">
+                    {/* <Button>Order Now</Button> */}
+                    <Button onClick={scrollToFoodItem}>Order Now</Button>
+                    {/* <a href="/menu" className="text-yellow-400 hover:text-yellow-500 font-bold text-decoration-line px-3">
                         See Menu
-                    </a>
+                    </a> */}
                 </div>
             </div>
             <div className="banner-image w-full md:w-1/2 p-3 flex justify-end">
